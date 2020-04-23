@@ -1,33 +1,80 @@
+actions:
+  - action_check_cuisine
+  - action_check_location
+  - action_search_restaurants
+  - action_send_email
+  - utter_askBudget
+  - utter_askCuisine
+  - utter_askLocation
+  - utter_askSendEmail
+  - utter_cantUnderstand
+  - utter_goodbye
+  - utter_greet
+  - utter_iamabot
+  - utter_locationNotServiced
+entities:
+  - budget
+  - cuisine
+  - email
+  - location
+  - people
+  - price
 intents:
   - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
   - restaurant_search
-
+  - affirm
+  - goodbye
+  - bot_challenge
 responses:
-  utter_greet:
-    - text: "Hey! How are you?"
-
-  utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-    - text: "Did that help you?"
-
-  utter_happy:
-    - text: "Great, carry on!"
-
+  utter_askBudget:
+    - buttons:
+        - payload: low
+          title: Lesser than Rs. 300
+        - payload: medium
+          title: Rs. 300 to 700
+        - payload: high
+          title: More than 700
+      text: What price range are you looking at?
+  utter_askCuisine:
+    - buttons:
+        - payload: Chinese
+          title: Chinese
+        - payload: Italian
+          title: Italian
+        - payload: South Indian
+          title: South Indian
+        - payload: North Indian
+          title: North Indian
+        - payload: Mexican
+          title: Mexican
+        - payload: American
+          title: American
+      text: What kind of cuisine would you like to have?
+  utter_askLocation:
+    - text: In which location?
+  utter_askSendEmail:
+    - text: Should I send you details of all the restaurants on email?
+  utter_cantUnderstand:
+    - text: Sorry, I can't seem to understand you
   utter_goodbye:
-    - text: "Bye"
-
+    - text: Thanks for visiting us! Hope we helped. See you again!
+  utter_greet:
+    - text: Hello! Thank you for choosing Foodie! How may I help you?
   utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
-
+    - text: I am a bot, powered by Pro Developers :P
+  utter_locationNotServiced:
+    - text:
+        Sorry, we don’t operate in this city yet. Can you please specify some other
+        location?
 session_config:
-  session_expiration_time: 60
   carry_over_slots_to_new_session: true
+  session_expiration_time: 0
+slots:
+  budget:
+    type: text
+  cuisine:
+    type: text
+  email:
+    type: text
+  location:
+    type: text

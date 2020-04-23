@@ -26,15 +26,14 @@
 #
 #         return []
 
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import unicode_literals
-
+# Default imports
+import os
+import json
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
+
+# Custom imports
 from utils import zomato_api as zomatopy
-import json
 
 
 class ActionSearchRestaurants(Action):
@@ -42,10 +41,21 @@ class ActionSearchRestaurants(Action):
         return "action_search_restaurants"
 
     def run(self, dispatcher, tracker, domain):
-        config = {"user_key": "f4924dc9ad672ee8c4f8c84743301af5"}
+        config = {"user_key": os.getenv("ZOMATO_API_KEY")}
         zomato = zomatopy.initialize_app(config)
+
+        # Loading data from slots
         loc = tracker.get_slot("location")
         cuisine = tracker.get_slot("cuisine")
+        budget = tracker.get_slot("budget")
+
+        budget_dict = {
+            "low": budget < 300,
+            "medium": 300 < budget < 700,
+            "high": budget > 700,
+        }
+
+        # Processing the data obtained
         location_detail = zomato.get_location(loc, 1)
         d1 = json.loads(location_detail)
         lat = d1["location_suggestions"][0]["latitude"]
@@ -78,3 +88,48 @@ class ActionSearchRestaurants(Action):
                 )
         dispatcher.utter_message("-----" + response)
         return [SlotSet("location", loc)]
+
+
+class ActionCheckLocation(Action):
+    def name(self):
+        return "action_check_location"
+
+    def run(self, dispatcher, tracker, domain):
+        location = tracker.get_slot("location")
+        location_list = json.loads(open("valid_cities.json").read())
+        if location not in location_list:
+            dispatcher.utter_message("Sorry location not found")
+            return [SlotSet("location", "")]
+        return [SlotSet("location", location)]
+
+
+class ActionCheckCuisine(Action):
+    def name(self):
+        return "action_check_cuisine"
+
+    def run(self, dispatcher, tracker, domain):
+        cuisine = tracker.get_slot("cuisine")
+        cuisine_list = [
+            "chinese",
+            "mexican",
+            "italian",
+            "american",
+            "south indian",
+            "north indian",
+        ]
+        if cuisine.lower() not in cuisine_list:
+            dispatcher.utter_message("Sorry cuisine not found")
+            return [SlotSet("cuisine", "")]
+        return [SlotSet("cuisine", cuisine)]
+
+
+class ActionSendEmail(Action):
+    def name(self):
+        return "action_send_email"
+
+    def run(self, dispatcher, tracker, domain):
+        email = tracker.get_slot("email")
+        print(f"Sending email to : {email}")
+        # TODO: Call send email method
+        response = "Sucessfully sent email!"
+        dispatcher.utter_message(response)

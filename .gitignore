@@ -143,3 +143,8 @@ models/*.gz
 # Environment variables
 *.in
 *.out
+
+# Rasa .db, .db-shm and .db-val files
+*.db
+*.db-shm
+*.db-wal

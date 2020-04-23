@@ -259,6 +259,7 @@ class Zomato:
         restaurant_details.update({"city": a["location"]["city"]})
         restaurant_details.update({"city_ID": a["location"]["city_id"]})
         restaurant_details.update({"user_rating": a["user_rating"]["aggregate_rating"]})
+        restaurant_details.update({"cost_for_two": a["average_cost_for_two"]})
 
         restaurant_details = DotDict(restaurant_details)
         return restaurant_details
