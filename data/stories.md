@@ -98,3 +98,28 @@
     - slot{"email": "something@gmail.com"}
     - action_send_email
     - action_restart
+
+## interactive_story_2
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_askLocation
+* restaurant_search{"location": "Bangalore"}
+    - slot{"location": "Bangalore"}
+    - action_check_location
+    - slot{"location": "Bangalore"}
+    - utter_askCuisine
+* restaurant_search{"cuisine": "Italian"}
+    - slot{"cuisine": "Italian"}
+    - action_check_cuisine
+    - slot{"cuisine": "Italian"}
+    - utter_askBudget
+* restaurant_search
+    - action_search_restaurants
+    - slot{"location": "Bangalore"}
+    - utter_askSendEmail
+* restaurant_search{"email": "sample_email@somedomain.com"}
+    - slot{"email": "sample_email@somedomain.com"}
+    - action_send_email
+    - utter_goodbye
+    - action_restart

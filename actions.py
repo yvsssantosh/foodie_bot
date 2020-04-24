@@ -49,35 +49,30 @@ class ActionSearchRestaurants(Action):
         cuisine = tracker.get_slot("cuisine")
         budget = tracker.get_slot("budget")
 
-        budget_dict = {
-            "low": budget < 300,
-            "medium": 300 < budget < 700,
-            "high": budget > 700,
-        }
-
         # Processing the data obtained
         location_detail = zomato.get_location(loc, 1)
         d1 = json.loads(location_detail)
         lat = d1["location_suggestions"][0]["latitude"]
         lon = d1["location_suggestions"][0]["longitude"]
         cuisines_dict = {
-            "bakery": 5,
+            "american": 1,
             "chinese": 25,
-            "cafe": 30,
-            "italian": 55,
-            "biryani": 7,
             "north indian": 50,
+            "italian": 55,
+            "mexican": 73,
             "south indian": 85,
         }
         results = zomato.restaurant_search(
-            "", lat, lon, str(cuisines_dict.get(cuisine)), 5
+            "", lat, lon, str(cuisines_dict.get(cuisine)), limit=20
         )
+
         d = json.loads(results)
-        response = ""
+
         if d["results_found"] == 0:
             response = "no results"
         else:
-            for restaurant in d["restaurants"]:
+            restaurants = zomato.filter_restaurants_by_budget(budget, d["restaurants"])
+            for restaurant in restaurants:
                 response = (
                     response
                     + "Found "
@@ -85,6 +80,8 @@ class ActionSearchRestaurants(Action):
                     + " in "
                     + restaurant["restaurant"]["location"]["address"]
                     + "\n"
+                    + "with cost for two around"
+                    + restaurant["restaurant"]["cost_for_two"]
                 )
         dispatcher.utter_message("-----" + response)
         return [SlotSet("location", loc)]

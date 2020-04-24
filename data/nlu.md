@@ -7,6 +7,7 @@
 - hey there
 - yo
 - Hello
+- Hola
 
 ## intent:goodbye
 - bye
@@ -75,14 +76,18 @@
 - [Japanese](cuisine)
 - [low](budget)
 - yes please send it to [sample_email@domain.com](email)
-- /I'm looking for restaurants
+- I'm looking for restaurants
 - I'm looking for a nice place to eat
 - [qwerty@gmail.com](email)
 - I'm looking for restaurants in [kondapur](location)
-- [Hyderabad](location)
 - [Mexican](cuisine)
 - medium
 - Yes, email me at [something@gmail.com](email)
+- I’m hungry. Looking out for some good restaurants
+- [bengaluru](location:bangalore)
+- [bengaluru](location:Bangalore)
+- [Italian](cuisine)
+- yes send it to [sample_email@somedomain.com](email)
 
 ## intent:bot_challenge
 - are you a bot?
@@ -121,6 +126,12 @@
 - veggie
 - vegg
 - veg
+
+## synonym:Hubli-Dharwad
+- hubli
+- Hubli
+- Dharwad
+- dharwad
 
 ## lookup:valid_cuisines.txt
   data/valid_cuisines.txt
