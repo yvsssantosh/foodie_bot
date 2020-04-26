@@ -1,4 +1,4 @@
-## Complete Story Working #latest
+<!-- ## Complete Story Working #latest
 * greet
     - utter_greet
 * restaurant_search
@@ -47,5 +47,75 @@
 * send_email{"email": "yvss.santosh@gmail.com"}
     - slot{"email": "yvss.santosh@gmail.com"}
     - action_send_email
+    - utter_goodbye
+    - action_restart -->
+
+
+<!-- ## Happy Path
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - form{"name": null}
+    - utter_askSendEmail
+* email_check
+    - utter_enterEmail
+* email_check{"email": "yvss.santosh@gmail.com"}
+    - slot{"email": "yvss.santosh@gmail.com"}
+    - action_send_email
+    - utter_goodbye
+    - action_restart -->
+
+## interactive_story_1
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"requested_slot": "location"}
+* form: location_check{"location": "bangalore"}
+    - slot{"location": "bangalore"}
+    - slot{"requested_slot": "cuisine"}
+    - form: restaurant_form
+* form: cuisine_check{"cuisine": "mexican"}
+    - slot{"cuisine": "mexican"}
+    - slot{"requested_slot": "budget"}
+    - form: restaurant_form
+* form: budget_check{"budget": "medium"}
+    - slot{"budget": "medium"}
+    - form: restaurant_form
+    - utter_askSendEmail
+* email_check
+    - utter_enterEmail
+* email_check{"email": "yvss.santosh@gmail.com"}
+    - slot{"email": "yvss.santosh@gmail.com"}
+    - action_send_email
+    - utter_goodbye
+    - action_restart
+
+## User denies email sending
+* greet
+    - utter_greet
+* request_restaurant
+    - restaurant_form
+    - form{"name": "restaurant_form"}
+    - slot{"requested_slot": "location"}
+* form: location_check{"location": "hyderabad"}
+    - slot{"location": "hyderabad"}
+    - slot{"requested_slot": "cuisine"}
+    - form: restaurant_form
+* form: cuisine_check{"cuisine": "american"}
+    - slot{"cuisine": "american"}
+    - slot{"requested_slot": "budget"}
+    - form: restaurant_form
+* form: budget_check{"budget": "high"}
+    - slot{"budget": "high"}
+    - form: restaurant_form
+    - slot{"restaurants_file": "restaurants-2020-04-27-00-36-40.json"}
+    - form{"name": null}
+    - slot{"requested_slot": null}
+    - utter_askSendEmail
+* deny
     - utter_goodbye
     - action_restart

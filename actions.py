@@ -1,37 +1,11 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/core/actions/#custom-actions/
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-# from typing import Any, Text, Dict, List
-#
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
-
-# Default imports
 import os
 import json
-from rasa_sdk import Action
 from datetime import datetime
 from rasa_sdk.events import SlotSet
+from rasa_sdk import Action, Tracker
+from rasa_sdk.forms import FormAction
+from rasa_sdk.executor import CollectingDispatcher
+from typing import Dict, Text, Any, List, Union, Optional
 
 # Custom imports
 from utils.formatter import restaurant_formatter_sorter
@@ -39,18 +13,92 @@ from utils.send_email import send_email
 from utils import zomato_api as zomatopy
 
 
-class ActionSearchRestaurants(Action):
-    """
-    Queries Zomato API based on parameters cuisine, location.
-    
-    Saves the result data to a file based on timestamp which will
-    be used later to send email listing top 10 restaurants to the customer
-    """
+class RestaurantForm(FormAction):
+    def name(self) -> Text:
+        """Unique identifier of the form"""
 
-    def name(self):
-        return "action_search_restaurants"
+        return "restaurant_form"
 
-    def run(self, dispatcher, tracker, domain):
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        """A list of required slots that the form has to fill"""
+
+        return [
+            "location",
+            "cuisine",
+            "budget",
+        ]
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        """A dictionary to map required slots to
+            - an extracted entity
+            - intent: value pairs
+            - a whole message
+            or a list of them, where a first match will be picked"""
+
+        return {
+            "location": [self.from_entity(entity="location"), self.from_text()],
+            "cuisine": [self.from_entity(entity="cuisine"), self.from_text()],
+            "budget": [self.from_entity(entity="budget"), self.from_text()],
+        }
+
+    def validate_cuisine(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """
+        Checks if the cuisines are a part of:
+        1. American         4. Mexican
+        2. Chinese          5. North Indian
+        3. Italian          6. South Indian
+        """
+        cuisine_list = [
+            "american",
+            "chinese",
+            "italian",
+            "mexican",
+            "north indian",
+            "south indian",
+        ]
+        print("########## cuisine value is : ", value)
+        if value.lower() not in cuisine_list:
+            dispatcher.utter_message(template="utter_wrong_cuisine")
+            return {"cuisine": None}
+        return {"cuisine": value}
+
+    def validate_location(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """
+        Checks if the given locations are part of TIER-I & TIER-II cities
+        """
+        location_list = open("./data/valid_cities.txt").read().split("\n")
+        print("########## Location value is : ", value)
+        if value.lower() not in location_list:
+            dispatcher.utter_message(template="utter_locationNotServiced")
+            return {"location": None}
+        return {"location": value}
+
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """
+        Queries Zomato API based on parameters cuisine, location.
+        
+        Saves the result data to a file based on timestamp which will
+        be used later to send email listing top 10 restaurants to the customer
+        """
+
         # Zomato API Config
         config = {"user_key": os.getenv("ZOMATO_API_KEY")}
         zomato = zomatopy.initialize_app(config)
@@ -112,48 +160,6 @@ class ActionSearchRestaurants(Action):
 
         # Returning back the newly added data `restaurants_file`
         return [SlotSet("restaurants_file", file_path.split("/")[2])]
-
-
-class ActionCheckLocation(Action):
-    """
-    Checks if the given locations are part of TIER-I & TIER-II cities
-    """
-
-    def name(self):
-        return "action_check_location"
-
-    def run(self, dispatcher, tracker, domain):
-        location = tracker.get_slot("location")
-        location_list = open("./data/valid_cities.txt").read().split("\n")
-        if location not in location_list:
-            dispatcher.utter_message(template="utter_locationNotServiced")
-            return [SlotSet("location", None)]
-
-
-class ActionCheckCuisine(Action):
-    """
-    Checks if the cuisines are a part of:
-    1. American         4. Mexican
-    2. Chinese          5. North Indian
-    3. Italian          6. South Indian
-    """
-
-    def name(self):
-        return "action_check_cuisine"
-
-    def run(self, dispatcher, tracker, domain):
-        cuisine = tracker.get_slot("cuisine")
-        cuisine_list = [
-            "american",
-            "chinese",
-            "italian",
-            "mexican",
-            "north indian",
-            "south indian",
-        ]
-        if cuisine and cuisine.lower() not in cuisine_list:
-            dispatcher.utter_message("Sorry cuisine not found")
-            return [SlotSet("cuisine", None)]
 
 
 class ActionSendEmail(Action):

@@ -1,83 +1,96 @@
-actions:
-  - action_check_cuisine
-  - action_check_location
-  - action_search_restaurants
-  - action_send_email
-  - utter_askBudget
-  - utter_askCuisine
-  - utter_askLocation
-  - utter_askSendEmail
-  - utter_cantUnderstand
-  - utter_enterEmail
-  - utter_goodbye
-  - utter_greet
-  - utter_locationNotServiced
-entities:
-  - budget
-  - cuisine
-  - email
-  - location
-intents:
-  - affirm
-  - budget_check
-  - cuisine_check
-  - goodbye
-  - greet
-  - location_search
-  - restaurant_search
-  - send_email
-responses:
-  utter_askBudget:
-    - buttons:
-        - payload: '/budget_check{"budget": "low"}'
-          title: Lesser than Rs. 300
-        - payload: '/budget_check{"budget": "medium"}'
-          title: Rs. 300 to 700
-        - payload: '/budget_check{"budget": "high"}'
-          title: More than 700
-      text: What price range are you looking at?
-  utter_askCuisine:
-    - buttons:
-        - payload: Chinese
-          title: Chinese
-        - payload: Italian
-          title: Italian
-        - payload: South Indian
-          title: South Indian
-        - payload: North Indian
-          title: North Indian
-        - payload: Mexican
-          title: Mexican
-        - payload: American
-          title: American
-      text: What kind of cuisine would you like to have?
-  utter_askLocation:
-    - text: In which location?
-  utter_askSendEmail:
-    - text: Should I send you details of top 10 restaurants on email?
-  utter_cantUnderstand:
-    - text: Sorry, I can't seem to understand you
-  utter_enterEmail:
-    - text: Please enter your email address
-  utter_goodbye:
-    - text: Thanks for visiting us! Hope we helped. See you again!
-  utter_greet:
-    - text: Hello! Thank you for choosing Foodie! How may I help you?
-  utter_locationNotServiced:
-    - text:
-        Sorry, we don’t operate in this city yet. Can you please specify some other
-        location?
 session_config:
-  carry_over_slots_to_new_session: true
   session_expiration_time: 0
+  carry_over_slots_to_new_session: true
+intents:
+- cuisine_check
+- deny
+- budget_check
+- location_check
+- request_restaurant:
+    use_entities: []
+- greet
+- affirm
+- chitchat
+- goodbye
+- email_check
+- send_email
+- restaurant_search
+- location_search
+entities:
+- budget
+- cuisine
+- email
+- location
 slots:
   budget:
-    type: text
+    type: unfeaturized
+    auto_fill: false
   cuisine:
-    type: text
+    type: unfeaturized
+    auto_fill: false
   email:
     type: text
   location:
-    type: text
+    type: unfeaturized
+    auto_fill: false
+  requested_slot:
+    type: unfeaturized
   restaurants_file:
     type: text
+responses:
+  utter_askSendEmail:
+  - text: Should I send you details of top 10 restaurants on email?
+  utter_ask_budget:
+  - buttons:
+    - title: Lesser than Rs. 300
+      payload: low
+    - title: Rs. 300 to 700
+      payload: medium
+    - title: More than 700
+      payload: high
+    text: What price range are you looking at?
+  utter_ask_cuisine:
+  - buttons:
+    - title: Chinese
+      payload: Chinese
+    - title: Italian
+      payload: Italian
+    - title: South Indian
+      payload: South Indian
+    - title: North Indian
+      payload: North Indian
+    - title: Mexican
+      payload: Mexican
+    - title: American
+      payload: American
+    text: What kind of cuisine would you like to have?
+  utter_ask_location:
+  - text: In which location?
+  utter_cantUnderstand:
+  - text: Sorry, I can't seem to understand you
+  utter_enterEmail:
+  - text: Please enter your email address
+  utter_goodbye:
+  - text: Thanks for visiting us! Hope we helped. See you again!
+  utter_greet:
+  - text: Hello! Thank you for choosing Foodie! How may I help you?
+  utter_locationNotServiced:
+  - text: Sorry, we don’t operate in this city yet. Can you please specify some other
+      location?
+actions:
+- action_send_email
+- utter_askSendEmail
+- utter_ask_budget
+- utter_ask_cuisine
+- utter_ask_location
+- utter_cantUnderstand
+- utter_enterEmail
+- utter_goodbye
+- utter_greet
+- utter_locationNotServiced
+- action_check_location
+- action_restart -->
+- action_search_restaurants
+- action_check_cuisine
+forms:
+- restaurant_form

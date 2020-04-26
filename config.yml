@@ -18,6 +18,7 @@ pipeline:
     epochs: 100
 
 policies:
+  - name: FormPolicy
   - name: MemoizationPolicy
   - name: TEDPolicy
     max_history: 5
