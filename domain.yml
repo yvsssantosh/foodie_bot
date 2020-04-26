@@ -8,31 +8,32 @@ actions:
   - utter_askLocation
   - utter_askSendEmail
   - utter_cantUnderstand
+  - utter_enterEmail
   - utter_goodbye
   - utter_greet
-  - utter_iamabot
   - utter_locationNotServiced
 entities:
   - budget
   - cuisine
   - email
   - location
-  - people
-  - price
 intents:
-  - greet
-  - restaurant_search
   - affirm
+  - budget_check
+  - cuisine_check
   - goodbye
-  - bot_challenge
+  - greet
+  - location_search
+  - restaurant_search
+  - send_email
 responses:
   utter_askBudget:
     - buttons:
-        - payload: low
+        - payload: '/budget_check{"budget": "low"}'
           title: Lesser than Rs. 300
-        - payload: medium
+        - payload: '/budget_check{"budget": "medium"}'
           title: Rs. 300 to 700
-        - payload: high
+        - payload: '/budget_check{"budget": "high"}'
           title: More than 700
       text: What price range are you looking at?
   utter_askCuisine:
@@ -53,15 +54,15 @@ responses:
   utter_askLocation:
     - text: In which location?
   utter_askSendEmail:
-    - text: Should I send you details of all the restaurants on email?
+    - text: Should I send you details of top 10 restaurants on email?
   utter_cantUnderstand:
     - text: Sorry, I can't seem to understand you
+  utter_enterEmail:
+    - text: Please enter your email address
   utter_goodbye:
     - text: Thanks for visiting us! Hope we helped. See you again!
   utter_greet:
     - text: Hello! Thank you for choosing Foodie! How may I help you?
-  utter_iamabot:
-    - text: I am a bot, powered by Pro Developers :P
   utter_locationNotServiced:
     - text:
         Sorry, we don’t operate in this city yet. Can you please specify some other
@@ -77,4 +78,6 @@ slots:
   email:
     type: text
   location:
+    type: text
+  restaurants_file:
     type: text

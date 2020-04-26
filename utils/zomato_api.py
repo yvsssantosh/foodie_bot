@@ -13,7 +13,7 @@ class Zomato:
         self.user_key = config["user_key"]
 
     def restaurant_search(
-        self, query="", latitude="", longitude="", cuisines="", limit=5
+        self, query="", latitude="", longitude="", cuisines="", limit=30
     ):
         """
         Takes either query, latitude and longitude or cuisine as input.
@@ -58,6 +58,10 @@ class Zomato:
         return r
 
     def filter_restaurants_by_budget(self, budget, restaurants):
+        """
+        Takes budget, restaurants list and filters the list of restaurants
+        based on the budget of user.
+        """
         budget_filter = {
             "low": list(
                 filter(
@@ -82,7 +86,7 @@ class Zomato:
                 )
             ),
         }
-        return budget_filter.get(budget)[:5]
+        return budget_filter.get(budget)
 
 
 class DotDict(dict):

@@ -148,3 +148,9 @@ models/*.gz
 *.db
 *.db-shm
 *.db-wal
+
+# Mac OS related files
+.DS_Store
+
+# Temporary data files
+*.json
