@@ -13,6 +13,10 @@
 - hi, I'm a developer
 - yo!!
 - heylo
+- Hey
+- hello!
+- yo man!
+- helloo
 
 ## intent:goodbye
 - bye
@@ -68,6 +72,19 @@
 - i'm hungry and looking for [north](cuisine:north indian) restaurants in [kollam](location)
 - looking for restaurants
 - i want [decent](budget:medium) [china](cuisine:chinese) food
+- looking for [very costly](budget:high) [north](cuisine:north indian) food in [thiruvananthapuram](location)
+- I’m hungry. Looking out for some good restaurants
+- Can you suggest some good restaurants in [bhimawaram](location)
+- Can you suggest some good restaurants in [madhurai](location:madurai)
+- looking for good places to eat dinner
+- looking for good restaurants
+- mega hungry!! looking for [mexican](cuisine) restaurants in [ujjain](location)
+- looking for [cheap](budget:low) [chinese](cuisine) restaurants in [bengaluru](location:bangalore)
+- looking for [moderate](budget:medium) [mexican](cuisine) restaurants in [hyderabad](location)
+- I'm looking for [asian](cuisine) restaurants in [hyderabad](location)
+- im looking for [super rich](budget:high) [japanese](cuisine) restaurants
+- i'm looking for [super costly](budget:high) [australian](cuisine) restaurants
+- I'm looking for [abstemious](budget:medium) restaurants favouring [japanese](cuisine) cuisine
 
 ## intent:cuisine_check
 - [American](cuisine:american)
@@ -92,6 +109,13 @@
 - [chines](cuisine:chinese)
 - [american](cuisine)
 - [italian](cuisine)
+- I'll prefer [italian](cuisine)
+- i'll prefer [chines](cuisine:chinese)
+- i'll try [american](cuisine) this time
+- [usa](cuisine:american)
+- okay, is [italian](cuisine) available?
+- maybe look for [australian](cuisine) then?
+- okay, see [american](cuisine) then?
 
 ## intent:budget_check
 - [low](budget)
@@ -127,13 +151,15 @@
 - [<300](budget:low)
 - [>700](budget:high)
 - [< 300](budget:low)
+- [300-700](budget:medium) range
+- it should be [extravagant](budget:high)
 
 ## intent:send_email
-- Yes, send it to my email at [yvss.santosh@gmail.com](email)
-- Send to [yvss.santosh@gmail.com](email)
+- Yes, send it to my email at [pradeep.yadav_04@gmail.com](email)
+- Send to [pradeep.yadav_04@gmail.com](email)
 - [abcdefgh@domain.com](email)
 - Yes, send it to [beneyaz.cet@gmail.com](email)
-- [yvss.santosh@gmail.com](email)
+- [pradeep.yadav_04@gmail.com](email)
 - [qwerty_name04@gmail.com](email)
 - yeah, send to [my_head_bigger@facebook.com](email)
 - send to me at [yadavalli.ext@domain.com](email)
@@ -141,6 +167,13 @@
 - send to [yadav.mnopq@google.com](email)
 - send to [wolfram123alpha@gmail.com](email)
 - send it to [yadavalli.ext@nplay.in](email)
+- yeah, send to [ravichandran_ashwin@domain.co.in](email)
+- yes. Please send it to [abcdef@ikjl.tech](email)
+- yo. plz send to [querty@zyx.com](email)
+- [jddk.2jmd@kdl.co.in](email)
+- [anji@agiliq.com](email)
+- yo bro! send it to [anmol@agiliq.com](email)
+- yep, send to [superman@gmail.com](email)
 
 ## intent:location_search
 - [rajahmundry](location)
@@ -175,6 +208,12 @@
 - [lucknow](location)
 - okay try in [poona](location:pune)
 - in [gulbarga](location)
+- okay, then look in [madras](location:chennai)
+- in [mumbaim](location)
+- in [mumbai](location)
+- in [lingampally](location)
+- okay, then look in [nagpur](location)
+- in [coimbatore](location)
 
 ## intent:deny
 - No
@@ -189,6 +228,8 @@
 - nah, dont
 - no
 - no need
+- don't need
+- meh! no
 
 ## intent:chitchat
 - I want to play football
@@ -207,6 +248,7 @@
 - are you alright
 - are you having a good day
 - Are you ok?
+- I'm a dancer
 - are you okay
 - Do you feel good?
 - how are things going
@@ -257,12 +299,23 @@
 - and that's it?
 - nothing else?
 - ok then you can't help me
+- then, i don't want to check anymore
 
 ## synonym:agra
 - Agra
 
+## synonym:ajmer
+- Ajmer
+
 ## synonym:american
 - American
+- usa
+
+## synonym:amravati
+- Amravati
+
+## synonym:asansol
+- Asansol
 
 ## synonym:asian
 - pan asian
@@ -273,13 +326,6 @@
 - Bengaluru
 - Bangalore
 
-## synonym:purulia prayagraj
-- purulia
-- prayagraj
-- purulia Prayagraj
-- Purulia prayagraj
-- Purulia Prayagraj
-
 ## synonym:bokaro steel city
 - bokaro
 - steel city
@@ -287,12 +333,15 @@
 ## synonym:chandigarh
 - Chandigarh
 
+## synonym:chennai
+- madras
+
 ## synonym:chinese
 - chines
+- china
 - Chinese
 - Chines
 - chine
-- china
 - chinese
 
 ## synonym:dehradun
@@ -311,6 +360,7 @@
 ## synonym:high
 - lavish
 - luxirious
+- very costly
 - greater than 700
 - expensive
 - costly
@@ -366,17 +416,21 @@
 - <300
 - < 300
 
+## synonym:madurai
+- madhurai
+
 ## synonym:medium
 - moderate
 - acceptable
+- decent
 - reasonable
 - average
 - moderately expensive
 - between 300 and 700
 - 300>budget>700
 - greater than 300 and less than 700
-- decent
 - abstemious
+- 300-700
 
 ## synonym:mexican
 - Mexican
@@ -395,9 +449,19 @@
 ## synonym:pune
 - poona
 
+## synonym:purulia prayagraj
+- purulia
+- prayagraj
+- purulia Prayagraj
+- Purulia prayagraj
+- Purulia Prayagraj
+
 ## synonym:rajkot
 - Rajkot
 - rajakota
+
+## synonym:shimla
+- Shimla
 
 ## synonym:south indian
 - south

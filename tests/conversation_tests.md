@@ -1,4 +1,4 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
+<!-- #### This file contains tests to evaluate that your bot behaves as expected.
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/user-guide/testing-your-assistant/
 
 ## happy path 1
@@ -48,4 +48,4 @@
 
 ## bot challenge
 * bot_challenge: are you a bot?
-  - utter_iamabot
+  - utter_iamabot -->

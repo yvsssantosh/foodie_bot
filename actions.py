@@ -124,7 +124,7 @@ class ActionCheckCuisine(Action):
             "south indian",
         ]
         if cuisine and cuisine.lower() not in cuisine_list:
-            dispatcher.utter_message("Sorry cuisine not found")
+            dispatcher.utter_message(template="utter_noCuisine")
             return [SlotSet("cuisine", None)]
         return [SlotSet("cuisine", cuisine)]
 

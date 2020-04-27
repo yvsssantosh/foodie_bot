@@ -12,6 +12,7 @@ actions:
   - utter_goodbye
   - utter_greet
   - utter_locationNotServiced
+  - utter_noCuisine
   - utter_sorry_norestaurants
 entities:
   - budget
@@ -19,16 +20,16 @@ entities:
   - email
   - location
 intents:
-  - greet
-  - restaurant_search
-  - deny
-  - location_search
-  - send_email
-  - stop
-  - budget_check
   - chitchat
+  - stop
+  - deny
+  - send_email
+  - greet
   - cuisine_check
+  - location_search
+  - restaurant_search
   - affirm
+  - budget_check
   - goodbye
 responses:
   utter_askBudget:
@@ -71,6 +72,8 @@ responses:
     - text:
         Sorry, we don’t operate in this city yet. Can you please specify some other
         location?
+  utter_noCuisine:
+    - text: Please select from the list of available cuisines!
   utter_sorry_norestaurants:
     - text:
         Sorry, no restaurants found in the area you were looking for! Please try
