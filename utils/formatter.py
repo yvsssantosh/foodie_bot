@@ -27,4 +27,4 @@ def restaurant_formatter_sorter(restaurants):
 
         new_data.append(new_restaurant)
 
-    return sorted(new_data, key=lambda x: x["rating"], reverse=True)
+    return sorted(new_data, key=lambda x: float(x["rating"]), reverse=True)

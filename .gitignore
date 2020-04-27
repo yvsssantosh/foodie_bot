@@ -153,4 +153,4 @@ models/*.gz
 .DS_Store
 
 # Temporary data files
-*.json
+data/restaurants/*.json

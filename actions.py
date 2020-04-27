@@ -1,31 +1,3 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/core/actions/#custom-actions/
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-# from typing import Any, Text, Dict, List
-#
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
-
 # Default imports
 import os
 import json
@@ -154,6 +126,7 @@ class ActionCheckCuisine(Action):
         if cuisine and cuisine.lower() not in cuisine_list:
             dispatcher.utter_message("Sorry cuisine not found")
             return [SlotSet("cuisine", None)]
+        return [SlotSet("cuisine", cuisine)]
 
 
 class ActionSendEmail(Action):
@@ -181,9 +154,10 @@ class ActionSendEmail(Action):
         # Sending sucess response and deleting the file
         # for a success response
         response = (
-            "Sucessfully sent email!" and os.remove(restaurants_file_path)
+            dispatcher.utter_message("Sent! Bon Appétit!")
+            and os.remove(restaurants_file_path)
             if response == 202
-            else "Sorry!! Unable to send email right now! Will be processed soon!"
+            else dispatcher.utter_message(
+                "Sorry!! Unable to send email right now! Will be processed soon!"
+            )
         )
-
-        dispatcher.utter_message(response)

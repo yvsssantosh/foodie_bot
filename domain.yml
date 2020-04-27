@@ -12,20 +12,24 @@ actions:
   - utter_goodbye
   - utter_greet
   - utter_locationNotServiced
+  - utter_sorry_norestaurants
 entities:
   - budget
   - cuisine
   - email
   - location
 intents:
-  - affirm
-  - budget_check
-  - cuisine_check
-  - goodbye
   - greet
-  - location_search
   - restaurant_search
+  - deny
+  - location_search
   - send_email
+  - stop
+  - budget_check
+  - chitchat
+  - cuisine_check
+  - affirm
+  - goodbye
 responses:
   utter_askBudget:
     - buttons:
@@ -38,17 +42,17 @@ responses:
       text: What price range are you looking at?
   utter_askCuisine:
     - buttons:
-        - payload: Chinese
+        - payload: '/cuisine_check{"cuisine": "chinese"}'
           title: Chinese
-        - payload: Italian
+        - payload: '/cuisine_check{"cuisine": "italian"}'
           title: Italian
-        - payload: South Indian
+        - payload: '/cuisine_check{"cuisine": "south indian"}'
           title: South Indian
-        - payload: North Indian
+        - payload: '/cuisine_check{"cuisine": "north indian"}'
           title: North Indian
-        - payload: Mexican
+        - payload: '/cuisine_check{"cuisine": "mexican"}'
           title: Mexican
-        - payload: American
+        - payload: '/cuisine_check{"cuisine": "american"}'
           title: American
       text: What kind of cuisine would you like to have?
   utter_askLocation:
@@ -67,6 +71,10 @@ responses:
     - text:
         Sorry, we don’t operate in this city yet. Can you please specify some other
         location?
+  utter_sorry_norestaurants:
+    - text:
+        Sorry, no restaurants found in the area you were looking for! Please try
+        again!
 session_config:
   carry_over_slots_to_new_session: true
   session_expiration_time: 0

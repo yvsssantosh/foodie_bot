@@ -1,6 +1,6 @@
-American
-Chinese
-North Indian
-Italian
-Mexican
-South Indian
+american
+chinese
+north indian
+italian
+mexican
+south indian
