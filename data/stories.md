@@ -775,3 +775,91 @@
 * stop
     - utter_goodbye
     - action_restart
+
+## interactive_story_1
+* greet
+    - utter_greet
+* restaurant_search{"budget": "high", "cuisine": "japanese"}
+    - slot{"budget": "high"}
+    - slot{"cuisine": "japanese"}
+    - action_check_cuisine
+    - slot{"cuisine": null}
+* cuisine_check{"cuisine": "australian"}
+    - slot{"cuisine": "australian"}
+    - action_check_cuisine
+    - slot{"cuisine": null}
+* stop
+    - utter_goodbye
+    - action_restart
+
+## interactive_story_2
+* greet
+    - utter_greet
+* restaurant_search{"cuisine": "japanese", "location": "secundrabad"}
+    - slot{"cuisine": "japanese"}
+    - slot{"location": "secundrabad"}
+    - action_check_location
+    - slot{"location": null}
+* location_search{"location": "purulia prayagraj"}
+    - slot{"location": "purulia prayagraj"}
+    - action_check_location
+    - action_check_cuisine
+    - slot{"cuisine": null}
+* cuisine_check{"cuisine": "american"}
+    - slot{"cuisine": "american"}
+    - action_check_cuisine
+    - slot{"cuisine": "american"}
+    - utter_askBudget
+* budget_check{"budget": "medium"}
+    - slot{"budget": "medium"}
+    - action_search_restaurants
+    - slot{"restaurants_file": "restaurants-2020-04-27-23-33-44.json"}
+    - utter_askSendEmail
+* send_email{"email": "superman@batman.com"}
+    - slot{"email": "superman@batman.com"}
+    - utter_goodbye
+    - action_restart
+
+## interactive_story_3
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_check_cuisine
+    - slot{"cuisine": "chinese"}
+    - utter_askLocation
+* location_search{"location": "ranchi"}
+    - slot{"location": "ranchi"}
+    - action_check_location
+    - utter_askBudget
+* budget_check{"budget": "medium"}
+    - slot{"budget": "medium"}
+    - action_search_restaurants
+    - slot{"restaurants_file": "restaurants-2020-04-27-23-35-50.json"}
+    - utter_askSendEmail
+* deny
+    - utter_goodbye
+    - action_restart
+
+## interactive_story_4
+* greet
+    - utter_greet
+* restaurant_search{"location": "hyderabad"}
+    - slot{"location": "hyderabad"}
+    - action_check_location
+    - utter_askCuisine
+* cuisine_check{"cuisine": "south indian"}
+    - slot{"cuisine": "south indian"}
+    - action_check_cuisine
+    - slot{"cuisine": "south indian"}
+    - utter_askBudget
+* budget_check{"budget": "high"}
+    - slot{"budget": "high"}
+    - action_search_restaurants
+    - slot{"restaurants_file": "restaurants-2020-04-27-23-36-47.json"}
+    - utter_askSendEmail
+* affirm
+    - utter_enterEmail
+* send_email{"email": "lamborgini@gallado.com"}
+    - slot{"email": "lamborgini@gallado.com"}
+    - action_send_email
+    - utter_goodbye
+    - action_restart

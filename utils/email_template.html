@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .restaurant_header {
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font: 25px "Lato", sans-serif;
+            color: #111;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="restaurant_header">Restaurant List</div>
+    <p style="text-align:center;">Thanks for choosing Foodie! Here are the list of restaurants requested by you!</p>
+    <p style="text-align:left;">
+        <br>
+        {{#each restaurants}}
+        <br>
+        <br>
+        Restaurant Name : {{this.name}}<br>
+        Restaurant Address : {{this.address}}<br>
+        Cost for Two : {{this.cost_for_two}}<br>
+        Rating : {{this.rating}}<br>
+        <br>
+        <br>
+        {{/each}}
+        <br>
+    </p>
+</body>
+
+</html>

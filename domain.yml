@@ -20,16 +20,16 @@ entities:
   - email
   - location
 intents:
-  - chitchat
-  - stop
-  - deny
-  - send_email
-  - greet
-  - cuisine_check
-  - location_search
   - restaurant_search
+  - stop
+  - location_search
+  - deny
   - affirm
+  - greet
+  - send_email
+  - cuisine_check
   - budget_check
+  - chitchat
   - goodbye
 responses:
   utter_askBudget:

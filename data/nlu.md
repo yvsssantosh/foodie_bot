@@ -85,6 +85,10 @@
 - im looking for [super rich](budget:high) [japanese](cuisine) restaurants
 - i'm looking for [super costly](budget:high) [australian](cuisine) restaurants
 - I'm looking for [abstemious](budget:medium) restaurants favouring [japanese](cuisine) cuisine
+- i'm looking for [overpriced](budget:high) restaurants pertaining to [japanese](cuisine) cuisine
+- looking for [japanese](cuisine) restaurants in [secundrabad](location)
+- hi im looking for [china](cuisine:chinese) restaurants
+- looking for restaurants in [hyderabad](location)
 
 ## intent:cuisine_check
 - [American](cuisine:american)
@@ -116,6 +120,8 @@
 - okay, is [italian](cuisine) available?
 - maybe look for [australian](cuisine) then?
 - okay, see [american](cuisine) then?
+- try [australian](cuisine) maybe?
+- look for [american](cuisine) then
 
 ## intent:budget_check
 - [low](budget)
@@ -174,6 +180,8 @@
 - [anji@agiliq.com](email)
 - yo bro! send it to [anmol@agiliq.com](email)
 - yep, send to [superman@gmail.com](email)
+- cool! send to [superman@batman.com](email)
+- my email is [lamborgini@gallado.com](email)
 
 ## intent:location_search
 - [rajahmundry](location)
@@ -214,6 +222,8 @@
 - in [lingampally](location)
 - okay, then look in [nagpur](location)
 - in [coimbatore](location)
+- try looking in [purulia](location:purulia prayagraj)
+- in [ranchi](location)
 
 ## intent:deny
 - No
@@ -230,6 +240,7 @@
 - no need
 - don't need
 - meh! no
+- no dont want emails
 
 ## intent:chitchat
 - I want to play football
@@ -300,6 +311,7 @@
 - nothing else?
 - ok then you can't help me
 - then, i don't want to check anymore
+- I'm done
 
 ## synonym:agra
 - Agra
@@ -361,6 +373,8 @@
 - lavish
 - luxirious
 - very costly
+- super rich
+- super costly
 - greater than 700
 - expensive
 - costly
@@ -423,13 +437,13 @@
 - moderate
 - acceptable
 - decent
+- abstemious
 - reasonable
 - average
 - moderately expensive
 - between 300 and 700
 - 300>budget>700
 - greater than 300 and less than 700
-- abstemious
 - 300-700
 
 ## synonym:mexican
